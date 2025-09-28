@@ -1,3 +1,8 @@
+/**
+ * 游戏渲染器 - 负责管理游戏的图形渲染和UI层级
+ * 包含所有渲染层的初始化、管理和绘制逻辑
+ */
+
 import { EventBus } from "../../core/EventBus";
 import { GameView } from "../../core/game/GameView";
 import { UserSettings } from "../../core/game/UserSettings";
@@ -40,6 +45,13 @@ import { UnitDisplay } from "./layers/UnitDisplay";
 import { UnitLayer } from "./layers/UnitLayer";
 import { WinModal } from "./layers/WinModal";
 
+/**
+ * 创建游戏渲染器 - 初始化所有渲染层和UI组件
+ * @param canvas HTML5 Canvas元素
+ * @param game 游戏视图实例
+ * @param eventBus 事件总线实例
+ * @returns 配置好的游戏渲染器实例
+ */
 export function createRenderer(
   canvas: HTMLCanvasElement,
   game: GameView,
@@ -50,13 +62,14 @@ export function createRenderer(
 
   const uiState = { attackRatio: 20 };
 
-  //hide when the game renders
+  // 游戏渲染时隐藏启动模态框
   const startingModal = document.querySelector(
     "game-starting-modal",
   ) as GameStartingModal;
   startingModal.hide();
 
-  // TODO maybe append this to document instead of querying for them?
+  // TODO 也许应该将这些元素添加到document而不是查询它们？
+  // 初始化表情符号表格组件
   const emojiTable = document.querySelector("emoji-table") as EmojiTable;
   if (!emojiTable || !(emojiTable instanceof EmojiTable)) {
     console.error("EmojiTable element not found in the DOM");
@@ -65,6 +78,7 @@ export function createRenderer(
   emojiTable.game = game;
   emojiTable.initEventBus(eventBus);
 
+  // 初始化建造菜单组件
   const buildMenu = document.querySelector("build-menu") as BuildMenu;
   if (!buildMenu || !(buildMenu instanceof BuildMenu)) {
     console.error("BuildMenu element not found in the DOM");
@@ -73,6 +87,7 @@ export function createRenderer(
   buildMenu.eventBus = eventBus;
   buildMenu.transformHandler = transformHandler;
 
+  // 初始化排行榜组件
   const leaderboard = document.querySelector("leader-board") as Leaderboard;
   if (!leaderboard || !(leaderboard instanceof Leaderboard)) {
     console.error("LeaderBoard element not found in the DOM");

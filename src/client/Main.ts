@@ -1,10 +1,22 @@
+/**
+ * 主客户端文件 - 负责初始化和管理游戏客户端的核心功能
+ * 包含客户端类定义、事件处理和用户界面组件的初始化
+ */
+
+// 导入版本信息
 import version from "../../resources/version.txt";
+// 导入API响应类型定义
 import { UserMeResponse } from "../core/ApiSchemas";
+// 导入事件总线系统
 import { EventBus } from "../core/EventBus";
+// 导入游戏相关的数据结构
 import { GameRecord, GameStartInfo, ID } from "../core/Schemas";
+// 导入服务器配置相关
 import { ServerConfig } from "../core/configuration/Config";
 import { getServerConfigFromClient } from "../core/configuration/ConfigLoader";
+// 导入用户设置管理
 import { UserSettings } from "../core/game/UserSettings";
+// 导入各种模态框和组件
 import "./AccountModal";
 import { joinLobby } from "./ClientGameRunner";
 import "./DarkModeButton";
@@ -30,25 +42,32 @@ import { SendKickPlayerIntentEvent } from "./Transport";
 import { UserSettingModal } from "./UserSettingModal";
 import "./UsernameInput";
 import { UsernameInput } from "./UsernameInput";
+// 导入工具函数
 import {
   generateCryptoRandomUUID,
   incrementGamesPlayed,
   translateText,
 } from "./Utils";
+// 导入组件
 import "./components/NewsButton";
 import { NewsButton } from "./components/NewsButton";
 import "./components/baseComponents/Button";
 import "./components/baseComponents/Modal";
+// 导入JWT认证相关功能
 import { discordLogin, getUserMe, isLoggedIn } from "./jwt";
+// 导入样式文件
 import "./styles.css";
 
+// 全局类型声明 - 扩展Window对象以包含第三方库的类型定义
 declare global {
   interface Window {
+    // PageOS分析工具的类型定义
     PageOS: {
       session: {
         newPageView: () => void;
       };
     };
+    // Ramp广告系统的类型定义
     ramp: {
       que: Array<() => void>;
       passiveMode: boolean;
@@ -61,40 +80,54 @@ declare global {
     };
   }
 
-  // Extend the global interfaces to include your custom events
+  // 扩展全局事件映射接口以包含自定义事件
   interface DocumentEventMap {
     "join-lobby": CustomEvent<JoinLobbyEvent>;
     "kick-player": CustomEvent;
   }
 }
 
+/**
+ * 加入游戏大厅事件的数据结构
+ */
 export interface JoinLobbyEvent {
-  clientID: string;
-  // Multiplayer games only have gameID, gameConfig is not known until game starts.
-  gameID: string;
-  // GameConfig only exists when playing a singleplayer game.
-  gameStartInfo?: GameStartInfo;
-  // GameRecord exists when replaying an archived game.
-  gameRecord?: GameRecord;
+  clientID: string; // 客户端ID
+  // 多人游戏只有gameID，游戏配置在游戏开始前是未知的
+  gameID: string; // 游戏ID
+  // 游戏配置只在单人游戏时存在
+  gameStartInfo?: GameStartInfo; // 游戏开始信息
+  // 游戏记录在回放存档游戏时存在
+  gameRecord?: GameRecord; // 游戏记录
 }
 
+/**
+ * 客户端主类 - 管理游戏客户端的核心功能和用户界面
+ */
 class Client {
+  // 游戏停止函数的引用
   private gameStop: (() => void) | null = null;
+  // 事件总线实例，用于组件间通信
   private eventBus: EventBus = new EventBus();
 
-  private usernameInput: UsernameInput | null = null;
-  private flagInput: FlagInput | null = null;
-  private darkModeButton: DarkModeButton | null = null;
+  // 用户界面组件的引用
+  private usernameInput: UsernameInput | null = null; // 用户名输入组件
+  private flagInput: FlagInput | null = null; // 国旗输入组件
+  private darkModeButton: DarkModeButton | null = null; // 暗色模式按钮
 
-  private joinModal: JoinPrivateLobbyModal;
-  private publicLobby: PublicLobby;
-  private userSettings: UserSettings = new UserSettings();
-  private patternsModal: TerritoryPatternsModal;
-  private tokenLoginModal: TokenLoginModal;
+  // 各种模态框组件
+  private joinModal: JoinPrivateLobbyModal; // 加入私人大厅模态框
+  private publicLobby: PublicLobby; // 公共大厅组件
+  private userSettings: UserSettings = new UserSettings(); // 用户设置管理
+  private patternsModal: TerritoryPatternsModal; // 领土图案模态框
+  private tokenLoginModal: TokenLoginModal; // 令牌登录模态框
 
   constructor() {}
 
+  /**
+   * 初始化客户端 - 设置所有UI组件和事件监听器
+   */
   initialize(): void {
+    // 设置游戏版本显示
     const gameVersion = document.getElementById(
       "game-version",
     ) as HTMLDivElement;
@@ -103,11 +136,14 @@ class Client {
     }
     gameVersion.innerText = version;
 
+    // 初始化新闻模态框
     const newsModal = document.querySelector("news-modal") as NewsModal;
     if (!newsModal) {
       console.warn("News modal element not found");
     }
     newsModal instanceof NewsModal;
+    
+    // 初始化新闻按钮
     const newsButton = document.querySelector("news-button") as NewsButton;
     if (!newsButton) {
       console.warn("News button element not found");
@@ -115,9 +151,10 @@ class Client {
       console.log("News button element found");
     }
 
-    // Comment out to show news button.
+    // 注释掉以显示新闻按钮
     // newsButton.hidden = true;
 
+    // 初始化语言选择器和语言模态框
     const langSelector = document.querySelector(
       "lang-selector",
     ) as LangSelector;
@@ -131,11 +168,13 @@ class Client {
       console.warn("Language modal element not found");
     }
 
+    // 初始化国旗输入组件
     this.flagInput = document.querySelector("flag-input") as FlagInput;
     if (!this.flagInput) {
       console.warn("Flag input element not found");
     }
 
+    // 初始化暗色模式按钮
     this.darkModeButton = document.querySelector(
       "dark-mode-button",
     ) as DarkModeButton;
@@ -143,6 +182,7 @@ class Client {
       console.warn("Dark mode button element not found");
     }
 
+    // 初始化用户名输入组件
     this.usernameInput = document.querySelector(
       "username-input",
     ) as UsernameInput;

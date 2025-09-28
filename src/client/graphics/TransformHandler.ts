@@ -1,3 +1,8 @@
+/**
+ * 变换处理器 - 管理游戏画布的缩放、平移和坐标转换
+ * 处理相机移动、缩放操作和屏幕坐标与游戏世界坐标的转换
+ */
+
 import { EventBus } from "../../core/EventBus";
 import { Cell } from "../../core/game/Game";
 import { GameView } from "../../core/game/GameView";
@@ -8,27 +13,49 @@ import {
   GoToUnitEvent,
 } from "./layers/Leaderboard";
 
+// 跳转动画间隔时间（毫秒）
 export const GOTO_INTERVAL_MS = 16;
+// 相机最大移动速度
 export const CAMERA_MAX_SPEED = 15;
+// 相机平滑系数
 export const CAMERA_SMOOTHING = 0.03;
 
+/**
+ * 变换处理器类
+ * 负责管理游戏视图的缩放、平移和坐标系转换
+ */
 export class TransformHandler {
+  // 当前缩放比例
   public scale: number = 1.8;
+  // Canvas边界矩形缓存
   private _boundingRect: DOMRect;
+  // X轴偏移量
   private offsetX: number = -350;
+  // Y轴偏移量
   private offsetY: number = -200;
+  // 上次跳转调用时间
   private lastGoToCallTime: number | null = null;
 
+  // 目标单元格（用于相机跟随）
   private target: Cell | null;
+  // 动画定时器ID
   private intervalID: NodeJS.Timeout | null = null;
+  // 变换是否发生改变的标志
   private changed = false;
 
+  /**
+   * 构造函数
+   * @param game 游戏视图实例
+   * @param eventBus 事件总线实例
+   * @param canvas HTML5 Canvas元素
+   */
   constructor(
     private game: GameView,
     private eventBus: EventBus,
     private canvas: HTMLCanvasElement,
   ) {
     this._boundingRect = this.canvas.getBoundingClientRect();
+    // 注册事件监听器
     this.eventBus.on(ZoomEvent, (e) => this.onZoom(e));
     this.eventBus.on(DragEvent, (e) => this.onMove(e));
     this.eventBus.on(GoToPlayerEvent, (e) => this.onGoToPlayer(e));
@@ -37,29 +64,55 @@ export class TransformHandler {
     this.eventBus.on(CenterCameraEvent, () => this.centerCamera());
   }
 
+  /**
+   * 更新Canvas边界矩形
+   * 当窗口大小改变时需要调用此方法
+   */
   public updateCanvasBoundingRect() {
     this._boundingRect = this.canvas.getBoundingClientRect();
   }
 
+  /**
+   * 获取Canvas边界矩形
+   * @returns Canvas的边界矩形
+   */
   boundingRect(): DOMRect {
     return this._boundingRect;
   }
 
+  /**
+   * 获取Canvas宽度
+   * @returns Canvas宽度
+   */
   width(): number {
     return this.boundingRect().width;
   }
+
+  /**
+   * 检查变换是否发生改变
+   * @returns 是否发生改变
+   */
   hasChanged(): boolean {
     return this.changed;
   }
+
+  /**
+   * 重置变换改变标志
+   */
   resetChanged() {
     this.changed = false;
   }
 
+  /**
+   * 处理Canvas变换
+   * 应用缩放和平移变换到渲染上下文
+   * @param context Canvas 2D渲染上下文
+   */
   handleTransform(context: CanvasRenderingContext2D) {
-    // Disable image smoothing for pixelated effect
+    // 禁用图像平滑以获得像素化效果
     context.imageSmoothingEnabled = false;
 
-    // Apply zoom and pan
+    // 应用缩放和平移
     context.setTransform(
       this.scale,
       0,
@@ -70,14 +123,19 @@ export class TransformHandler {
     );
   }
 
+  /**
+   * 将游戏世界坐标转换为屏幕坐标
+   * @param cell 游戏世界中的单元格
+   * @returns 屏幕坐标 {x, y}
+   */
   worldToScreenCoordinates(cell: Cell): { x: number; y: number } {
-    // Step 1: Convert from Cell coordinates to game coordinates
-    // (reverse of Math.floor operation - we'll use the exact values)
+    // 步骤1：从Cell坐标转换为游戏坐标
+    // （Math.floor操作的逆向 - 我们将使用精确值）
     const gameX = cell.x;
     const gameY = cell.y;
 
-    // Step 2: Reverse the game center offset calculation
-    // Original: gameX = centerX + this.game.width() / 2
+    // 步骤2：逆向游戏中心偏移计算
+    // 原始：gameX = centerX + this.game.width() / 2
     // Therefore: centerX = gameX - this.game.width() / 2
     const centerX = gameX - this.game.width() / 2;
     const centerY = gameY - this.game.height() / 2;

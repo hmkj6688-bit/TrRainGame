@@ -624,12 +624,12 @@ export class PlayerImpl implements Player {
 
     this.sentDonations.push(new Donation(recipient, this.mg.ticks()));
     this.mg.displayMessage(
-      `Sent ${renderTroops(troops)} troops to ${recipient.name()}`,
+      `向${recipient.name()}派遣了${renderTroops(troops)}部队`,
       MessageType.SENT_TROOPS_TO_PLAYER,
       this.id(),
     );
     this.mg.displayMessage(
-      `Received ${renderTroops(troops)} troops from ${this.name()}`,
+      `从${this.name()}获得${renderTroops(troops)}部队`,
       MessageType.RECEIVED_TROOPS_FROM_PLAYER,
       recipient.id(),
     );
@@ -644,12 +644,12 @@ export class PlayerImpl implements Player {
 
     this.sentDonations.push(new Donation(recipient, this.mg.ticks()));
     this.mg.displayMessage(
-      `Sent ${renderNumber(gold)} gold to ${recipient.name()}`,
+      `向${recipient.name()}发送了${renderNumber(gold)}黄金`,
       MessageType.SENT_GOLD_TO_PLAYER,
       this.id(),
     );
     this.mg.displayMessage(
-      `Received ${renderNumber(gold)} gold from ${this.name()}`,
+      `从${this.name()}获得${renderNumber(gold)}黄金`,
       MessageType.RECEIVED_GOLD_FROM_PLAYER,
       recipient.id(),
       gold,

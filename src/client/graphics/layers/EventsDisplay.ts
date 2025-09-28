@@ -770,7 +770,7 @@ export class EventsDisplay extends LitElement implements Layer {
                     })}
                     ${!attack.retreating
                       ? this.renderButton({
-                          content: "❌",
+                          content: "🔘点击撤退",
                           onClick: () => this.emitCancelAttackIntent(attack.id),
                           className: "text-left flex-shrink-0",
                           disabled: attack.retreating,
@@ -805,7 +805,7 @@ export class EventsDisplay extends LitElement implements Layer {
                     })}
                     ${!landAttack.retreating
                       ? this.renderButton({
-                          content: "❌",
+                          content: "🔘点击撤退",
                           onClick: () =>
                             this.emitCancelAttackIntent(landAttack.id),
                           className: "text-left flex-shrink-0",
@@ -842,7 +842,7 @@ export class EventsDisplay extends LitElement implements Layer {
                     })}
                     ${!boat.retreating()
                       ? this.renderButton({
-                          content: "❌",
+                          content: "🔘点击撤退",
                           onClick: () => this.emitBoatCancelIntent(boat.id()),
                           className: "text-left flex-shrink-0",
                           disabled: boat.retreating(),

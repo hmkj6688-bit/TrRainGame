@@ -1,3 +1,8 @@
+/**
+ * 客户端游戏运行器 - 负责管理游戏客户端的核心运行逻辑
+ * 包括游戏大厅连接、游戏状态管理、用户输入处理和渲染控制
+ */
+
 import { translateText } from "../client/Utils";
 import { EventBus } from "../core/EventBus";
 import {
@@ -47,20 +52,31 @@ import {
 import { createCanvas } from "./Utils";
 import { createRenderer, GameRenderer } from "./graphics/GameRenderer";
 
+/**
+ * 游戏大厅配置接口 - 定义加入游戏大厅所需的配置信息
+ */
 export interface LobbyConfig {
-  serverConfig: ServerConfig;
-  patternName: string | undefined;
-  flag: string;
-  playerName: string;
-  clientID: ClientID;
-  gameID: GameID;
-  token: string;
-  // GameStartInfo only exists when playing a singleplayer game.
+  serverConfig: ServerConfig; // 服务器配置
+  patternName: string | undefined; // 图案名称
+  flag: string; // 国旗标识
+  playerName: string; // 玩家名称
+  clientID: ClientID; // 客户端ID
+  gameID: GameID; // 游戏ID
+  token: string; // 认证令牌
+  // 游戏开始信息只在单人游戏时存在
   gameStartInfo?: GameStartInfo;
-  // GameRecord exists when replaying an archived game.
+  // 游戏记录在回放存档游戏时存在
   gameRecord?: GameRecord;
 }
 
+/**
+ * 加入游戏大厅 - 连接到游戏服务器并初始化游戏客户端
+ * @param eventBus 事件总线实例
+ * @param lobbyConfig 大厅配置信息
+ * @param onPrestart 预启动回调函数
+ * @param onJoin 加入成功回调函数
+ * @returns 停止游戏的函数
+ */
 export function joinLobby(
   eventBus: EventBus,
   lobbyConfig: LobbyConfig,
@@ -76,6 +92,7 @@ export function joinLobby(
 
   const transport = new Transport(lobbyConfig, eventBus);
 
+  // 连接成功回调函数
   const onconnect = () => {
     console.log(`Joined game lobby ${lobbyConfig.gameID}`);
     transport.joinGame(0);

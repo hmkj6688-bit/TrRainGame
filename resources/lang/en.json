@@ -9,7 +9,7 @@
     "close": "Close"
   },
   "main": {
-    "title": "OpenFront (ALPHA)",
+    "title": "EEOO.IO",
     "join_discord": "Join the Discord!",
     "login_discord": "Login with Discord",
     "checking_login": "Checking login...",
@@ -461,8 +461,8 @@
     "not_enough_money": "Not enough money"
   },
   "win_modal": {
-    "support_openfront": "Support OpenFront!",
-    "territory_pattern": "Purchase a territory pattern to support OpenFront!",
+    "support_openfront": "支持TrRainEarth",
+    "territory_pattern": "购买区域模式以支持TrRainEarth！",
     "died": "You died",
     "your_team": "Your team won!",
     "other_team": "{team} team has won!",
@@ -480,7 +480,7 @@
     "team": "Team",
     "owned": "Owned",
     "gold": "Gold",
-    "troops": "Troops",
+    "troops": "军队",
     "launchers": "Launchers",
     "sams": "SAMs",
     "warships": "Warships",
@@ -495,7 +495,7 @@
     "player": "Player",
     "team": "Team",
     "alliance_timeout": "Alliance ends in",
-    "troops": "Troops",
+    "troops": "军队",
     "a_troops": "Attacking troops",
     "gold": "Gold",
     "ports": "Ports",
@@ -549,12 +549,12 @@
   },
   "control_panel": {
     "gold": "Gold",
-    "troops": "Troops",
+    "troops": "军队",
     "attack_ratio": "Attack Ratio"
   },
   "player_panel": {
     "gold": "Gold",
-    "troops": "Troops",
+    "troops": "军队",
     "betrayals": "Number of betrayals",
     "traitor": "Traitor",
     "alliance_time_remaining": "Alliance Expires In",
@@ -645,6 +645,48 @@
   "radial_menu": {
     "delete_unit_title": "Delete Unit",
     "delete_unit_description": "Click to delete the nearest unit"
+  },
+  "player_stats_table": {
+    "building_stats": "Building Statistics",
+    "ship_arrivals": "Ship Arrivals",
+    "nuke_stats": "Nuke Statistics",
+    "player_metrics": "Player Metrics",
+    "building": "Building",
+    "ship_type": "Ship Type",
+    "weapon": "Weapon",
+    "built": "Built",
+    "destroyed": "Destroyed",
+    "captured": "Captured",
+    "lost": "Lost",
+    "hits": "Hits",
+    "launched": "Launched",
+    "landed": "Landed",
+    "sent": "Sent",
+    "arrived": "Arrived",
+    "attack": "Attack",
+    "received": "Received",
+    "cancelled": "Cancelled",
+    "count": "Count",
+    "gold": "Gold",
+    "workers": "Workers",
+    "war": "War",
+    "trade": "Trade",
+    "steal": "Steal",
+    "unit": {
+      "city": "City",
+      "port": "Port",
+      "defp": "Defense Post",
+      "saml": "SAM Launcher",
+      "silo": "Missile Silo",
+      "wshp": "Warship",
+      "fact": "Factory",
+      "trade": "Trade Ship",
+      "trans": "Transport Ship",
+      "abomb": "Atom Bomb",
+      "hbomb": "Hydrogen Bomb",
+      "mirv": "MIRV",
+      "mirvw": "MIRV Warhead"
+    }
   },
   "game_list": {
     "recent_games": "Recent Games",

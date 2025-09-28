@@ -1,3 +1,8 @@
+/**
+ * 用户名输入组件 - 处理用户名的输入、验证和存储
+ * 提供用户名输入框、验证功能和本地存储管理
+ */
+
 import { LitElement, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { v4 as uuidv4 } from "uuid";
@@ -8,32 +13,57 @@ import {
   validateUsername,
 } from "../core/validations/username";
 
+// 本地存储中用户名的键名
 const usernameKey: string = "username";
 
+/**
+ * 用户名输入组件
+ * 提供用户名输入、验证、存储和自动生成功能
+ */
 @customElement("username-input")
 export class UsernameInput extends LitElement {
+  // 当前用户名状态
   @state() private username: string = "";
+  // 验证错误信息属性
   @property({ type: String }) validationError: string = "";
+  // 用户名是否有效的私有标志
   private _isValid: boolean = true;
+  // 用户设置实例
   private userSettings: UserSettings = new UserSettings();
 
-  // Remove static styles since we're using Tailwind
+  // 移除静态样式，因为我们使用Tailwind CSS
 
+  /**
+   * 创建渲染根 - 禁用Shadow DOM以允许Tailwind类生效
+   * @returns 当前元素实例
+   */
   createRenderRoot() {
-    // Disable shadow DOM to allow Tailwind classes to work
+    // 禁用shadow DOM以允许Tailwind类工作
     return this;
   }
 
+  /**
+   * 获取当前用户名
+   * @returns 当前用户名字符串
+   */
   public getCurrentUsername(): string {
     return this.username;
   }
 
+  /**
+   * 组件连接到DOM时的回调
+   * 加载存储的用户名并分发用户名事件
+   */
   connectedCallback() {
     super.connectedCallback();
     this.username = this.getStoredUsername();
     this.dispatchUsernameEvent();
   }
 
+  /**
+   * 渲染用户名输入框
+   * @returns 输入框的HTML模板
+   */
   render() {
     return html`
       <input
@@ -56,6 +86,10 @@ export class UsernameInput extends LitElement {
     `;
   }
 
+  /**
+   * 处理输入变化事件
+   * @param e 输入事件对象
+   */
   private handleChange(e: Event) {
     const input = e.target as HTMLInputElement;
     this.username = input.value.trim();
@@ -69,6 +103,10 @@ export class UsernameInput extends LitElement {
     }
   }
 
+  /**
+   * 获取存储的用户名
+   * @returns 存储的用户名或新生成的用户名
+   */
   private getStoredUsername(): string {
     const storedUsername = localStorage.getItem(usernameKey);
     if (storedUsername) {
@@ -77,6 +115,10 @@ export class UsernameInput extends LitElement {
     return this.generateNewUsername();
   }
 
+  /**
+   * 存储用户名到本地存储
+   * @param username 要存储的用户名
+   */
   private storeUsername(username: string) {
     if (username) {
       localStorage.setItem(usernameKey, username);

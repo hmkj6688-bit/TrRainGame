@@ -151,23 +151,23 @@ export interface UnitInfo {
 }
 
 export enum UnitType {
-  TransportShip = "Transport",
-  Warship = "Warship",
-  Shell = "Shell",
-  SAMMissile = "SAMMissile",
-  Port = "Port",
-  AtomBomb = "Atom Bomb",
-  HydrogenBomb = "Hydrogen Bomb",
-  TradeShip = "Trade Ship",
-  MissileSilo = "Missile Silo",
-  DefensePost = "Defense Post",
-  SAMLauncher = "SAM Launcher",
-  City = "City",
-  MIRV = "MIRV",
-  MIRVWarhead = "MIRV Warhead",
-  Construction = "Construction",
-  Train = "Train",
-  Factory = "Factory",
+  TransportShip = "运输船",
+  Warship = "战舰",
+  Shell = "炮弹",
+  SAMMissile = "防空导弹",
+  Port = "港口",
+  AtomBomb = "原子弹",
+  HydrogenBomb = "氢弹",
+  TradeShip = "贸易船",
+  MissileSilo = "导弹发射井",
+  DefensePost = "防御哨所",
+  SAMLauncher = "防空导弹发射器",
+  City = "城市",
+  MIRV = "多弹头导弹",
+  MIRVWarhead = "多弹头导弹弹头",
+  Construction = "建筑单位",
+  Train = "火车",
+  Factory = "工厂",
 }
 
 export enum TrainType {
@@ -312,9 +312,9 @@ export enum TerrainType {
 }
 
 export enum PlayerType {
-  Bot = "BOT",
-  Human = "HUMAN",
-  FakeHuman = "FAKEHUMAN",
+  Bot = "机器人",
+  Human = "人类玩家",
+  FakeHuman = "伪装人类",
 }
 
 export interface Execution {

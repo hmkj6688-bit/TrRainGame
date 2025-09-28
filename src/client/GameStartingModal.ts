@@ -1,12 +1,23 @@
+/**
+ * 游戏启动模态框 - 显示游戏加载和启动状态
+ * 在游戏初始化过程中向用户显示加载信息和进度
+ */
+
 import { LitElement, css, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { translateText } from "./Utils";
 
+/**
+ * 游戏启动模态框组件
+ * 用于在游戏启动过程中显示加载状态和相关信息
+ */
 @customElement("game-starting-modal")
 export class GameStartingModal extends LitElement {
+  // 模态框是否可见的状态
   @state()
   isVisible = false;
 
+  // 模态框样式定义
   static styles = css`
     .modal {
       display: none;

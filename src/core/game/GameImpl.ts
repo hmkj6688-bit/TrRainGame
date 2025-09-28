@@ -879,9 +879,9 @@ export class GameImpl implements Game {
   conquerPlayer(conqueror: Player, conquered: Player) {
     const gold = conquered.gold();
     this.displayMessage(
-      `Conquered ${conquered.displayName()} received ${renderNumber(
+      `征服 ${conquered.displayName()} 获得 ${renderNumber(
         gold,
-      )} gold`,
+      )} 黄金`,
       MessageType.CONQUERED_PLAYER,
       conqueror.id(),
       gold,

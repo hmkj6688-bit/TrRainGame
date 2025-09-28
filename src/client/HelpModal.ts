@@ -1,30 +1,56 @@
+/**
+ * 帮助模态框 - 显示游戏说明、快捷键和操作指南
+ * 提供游戏玩法介绍、键盘快捷键列表和控制说明
+ */
+
 import { LitElement, html } from "lit";
 import { customElement, query } from "lit/decorators.js";
 import { getAltKey, getModifierKey, translateText } from "../client/Utils";
 import "./components/Difficulties";
 import "./components/Maps";
 
+/**
+ * 帮助模态框组件
+ * 显示游戏说明、快捷键和操作指南的弹窗组件
+ */
 @customElement("help-modal")
 export class HelpModal extends LitElement {
+  // 模态框元素引用
   @query("o-modal") private modalEl!: HTMLElement & {
     open: () => void;
     close: () => void;
   };
 
+  /**
+   * 创建渲染根 - 直接使用当前元素而不是Shadow DOM
+   * @returns 当前元素实例
+   */
   createRenderRoot() {
     return this;
   }
 
+  /**
+   * 组件连接到DOM时的回调
+   * 添加键盘事件监听器
+   */
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener("keydown", this.handleKeyDown);
   }
 
+  /**
+   * 组件从DOM断开时的回调
+   * 移除键盘事件监听器
+   */
   disconnectedCallback() {
     window.removeEventListener("keydown", this.handleKeyDown);
     super.disconnectedCallback();
   }
 
+  /**
+   * 处理键盘按下事件
+   * @param e 键盘事件对象
+   */
   private handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === "Escape") {
       e.preventDefault();
@@ -32,6 +58,10 @@ export class HelpModal extends LitElement {
     }
   };
 
+  /**
+   * 渲染帮助模态框内容
+   * @returns 模态框的HTML模板
+   */
   render() {
     return html`
       <o-modal
@@ -140,9 +170,7 @@ export class HelpModal extends LitElement {
               </tr>
               <tr>
                 <td>
-                  <div class="mouse-shell">
-                    <div class="mouse-wheel" id="highlighted-wheel"></div>
-                  </div>
+                  <span class="key">U</span>
                 </td>
                 <td>${translateText("help_modal.action_auto_upgrade")}</td>
               </tr>

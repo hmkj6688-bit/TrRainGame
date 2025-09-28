@@ -9,7 +9,7 @@
     "close": "关闭"
   },
   "main": {
-    "title": "OpenFront (ALPHA)",
+    "title": "EEOO.IO",
     "join_discord": "加入 Discord",
     "login_discord": "用 Discord 登录",
     "checking_login": "正在检查登录...",
@@ -236,9 +236,9 @@
   },
   "difficulty": {
     "difficulty": "难度",
-    "Relaxed": "休闲",
-    "Balanced": "平衡",
-    "Intense": "困难",
+    "Easy": "休闲",
+    "Medium": "平衡",
+    "Hard": "困难",
     "Impossible": "地狱"
   },
   "game_mode": {

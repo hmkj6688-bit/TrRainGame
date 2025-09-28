@@ -6,9 +6,9 @@
   </picture>
 </p>
 
-[OpenFront.io](https://openfront.io/) is an online real-time strategy game focused on territorial control and alliance building. Players compete to expand their territory, build structures, and form strategic alliances in various maps based on real-world geography.
+[OpenFront.io](https://openfront.io/) 是一款专注于领土控制和联盟建设的在线实时策略游戏。玩家在基于真实世界地理的各种地图上竞争扩张领土、建造建筑物并形成战略联盟。
 
-This is a fork/rewrite of WarFront.io. Credit to https://github.com/WarFrontIO.
+这是 WarFront.io 的分支/重写版本。感谢 https://github.com/WarFrontIO。
 
 ![CI](https://github.com/openfrontio/OpenFrontIO/actions/workflows/ci.yml/badge.svg)
 [![Crowdin](https://badges.crowdin.net/openfront-mls/localized.svg)](https://crowdin.com/project/openfront-mls)
@@ -16,195 +16,195 @@ This is a fork/rewrite of WarFront.io. Credit to https://github.com/WarFrontIO.
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Assets: CC BY-SA 4.0](https://img.shields.io/badge/Assets-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-## 🌟 Features
+## 🌟 功能特性
 
-- **Real-time Strategy Gameplay**: Expand your territory and engage in strategic battles
-- **Alliance System**: Form alliances with other players for mutual defense
-- **Multiple Maps**: Play across various geographical regions including Europe, Asia, Africa, and more
-- **Resource Management**: Balance your expansion with defensive capabilities
-- **Cross-platform**: Play in any modern web browser
+- **实时策略游戏**: 扩张你的领土并参与战略战斗
+- **联盟系统**: 与其他玩家结成联盟进行相互防御
+- **多种地图**: 在包括欧洲、亚洲、非洲等各种地理区域进行游戏
+- **资源管理**: 平衡你的扩张与防御能力
+- **跨平台**: 在任何现代网络浏览器中游戏
 
-## 📋 Prerequisites
+## 📋 前置要求
 
-- [npm](https://www.npmjs.com/) (v10.9.2 or higher)
-- A modern web browser (Chrome, Firefox, Edge, etc.)
+- [npm](https://www.npmjs.com/) (v10.9.2 或更高版本)
+- 现代网络浏览器 (Chrome、Firefox、Edge 等)
 
-## 🚀 Installation
+## 🚀 安装
 
-1. **Clone the repository**
+1. **克隆仓库**
 
    ```bash
    git clone https://github.com/openfrontio/OpenFrontIO.git
    cd OpenFrontIO
    ```
 
-2. **Install dependencies**
+2. **安装依赖**
 
    ```bash
    npm i
    ```
 
-## 🎮 Running the Game
+## 🎮 运行游戏
 
-### Development Mode
+### 开发模式
 
-Run both the client and server in development mode with live reloading:
+同时运行客户端和服务器的开发模式，支持实时重载：
 
 ```bash
 npm run dev
 ```
 
-This will:
+这将会：
 
-- Start the webpack dev server for the client
-- Launch the game server with development settings
-- Open the game in your default browser
+- 启动客户端的 webpack 开发服务器
+- 启动带有开发设置的游戏服务器
+- 在默认浏览器中打开游戏
 
-### Client Only
+### 仅客户端
 
-To run just the client with hot reloading:
+仅运行支持热重载的客户端：
 
 ```bash
 npm run start:client
 ```
 
-### Server Only
+### 仅服务器
 
-To run just the server with development settings:
+仅运行带有开发设置的服务器：
 
 ```bash
 npm run start:server-dev
 ```
 
-### Connecting to staging or production backends
+### 连接到预发布或生产后端
 
-Sometimes it's useful to connect to production servers when replaying a game, testing user profiles, purchases, or login flow.
+有时连接到生产服务器对于重播游戏、测试用户配置文件、购买或登录流程很有用。
 
-To connect to staging api servers:
+连接到预发布 API 服务器：
 
 ```bash
 npm run dev:staging
 ```
 
-To connect to production api servers:
+连接到生产 API 服务器：
 
 ```bash
 npm run dev:prod
 ```
 
-## 🛠️ Development Tools
+## 🛠️ 开发工具
 
-- **Format code**:
+- **格式化代码**:
 
   ```bash
   npm run format
   ```
 
-- **Lint code**:
+- **代码检查**:
 
   ```bash
   npm run lint
   ```
 
-- **Lint and fix code**:
+- **代码检查并修复**:
 
   ```bash
   npm run lint:fix
   ```
 
-- **Testing**
+- **测试**
   ```bash
   npm test
   ```
 
-## 🏗️ Project Structure
+## 🏗️ 项目结构
 
-- `/src/client` - Frontend game client
-- `/src/core` - Shared game logic
-- `/src/server` - Backend game server
-- `/resources` - Static assets (images, maps, etc.)
+- `/src/client` - 前端游戏客户端
+- `/src/core` - 共享游戏逻辑
+- `/src/server` - 后端游戏服务器
+- `/resources` - 静态资源 (图片、地图等)
 
-## 📝 License
+## 📝 许可证
 
-This project is licensed under the terms found in the [LICENSE](LICENSE) file.
+本项目根据 [LICENSE](LICENSE) 文件中的条款进行许可。
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+欢迎贡献！请随时提交 Pull Request。
 
-1. Request to join the development [Discord](https://discord.gg/K9zernJB5z).
-1. Fork the repository
-1. Create your feature branch (`git checkout -b amazing-feature`)
-1. Commit your changes (`git commit -m 'Add some amazing feature'`)
-1. Push to the branch (`git push origin amazing-feature`)
-1. Open a Pull Request
+1. 请求加入开发 [Discord](https://discord.gg/K9zernJB5z)。
+1. Fork 仓库
+1. 创建你的功能分支 (`git checkout -b amazing-feature`)
+1. 提交你的更改 (`git commit -m 'Add some amazing feature'`)
+1. 推送到分支 (`git push origin amazing-feature`)
+1. 打开一个 Pull Request
 
-## 🌐 Translation
+## 🌐 翻译
 
-Translators are welcome! Please feel free to help translate into your language.
-How to help?
+欢迎翻译者！请随时帮助翻译成你的语言。
+如何帮助？
 
-1. Request to join the dev [Discord](https://discord.gg/K9zernJB5z) (in the application form, say you want to help translate)
-1. Go to the project's Crowdin translation page: [https://crowdin.com/project/openfront-mls](https://crowdin.com/project/openfront-mls)
-1. Login if you already have an account/ Sign up if you don't have one
-1. Select the language you want to translate in/ If your language isn't on the list, click the "Request New Language" button and enter the language you want added there.
-1. Translate the strings
+1. 请求加入开发 [Discord](https://discord.gg/K9zernJB5z) (在申请表中，说明你想帮助翻译)
+1. 前往项目的 Crowdin 翻译页面：[https://crowdin.com/project/openfront-mls](https://crowdin.com/project/openfront-mls)
+1. 如果你已有账户请登录 / 如果没有账户请注册
+1. 选择你想要翻译的语言 / 如果你的语言不在列表中，点击"请求新语言"按钮并输入你想要添加的语言。
+1. 翻译字符串
 
-### Project Governance
+### 项目治理
 
-- The project maintainer ([evan](https://github.com/evanpelle)) has final authority on all code changes and design decisions
-- All pull requests require maintainer approval before merging
-- The maintainer reserves the right to reject contributions that don't align with the project's vision or quality standards
+- 项目维护者 ([evan](https://github.com/evanpelle)) 对所有代码更改和设计决策拥有最终权威
+- 所有 pull request 在合并前都需要维护者批准
+- 维护者保留拒绝与项目愿景或质量标准不符的贡献的权利
 
-### Contribution Path for New Contributors
+### 新贡献者的贡献路径
 
-To ensure code quality and project stability, we use a progressive contribution system:
+为确保代码质量和项目稳定性，我们使用渐进式贡献系统：
 
-1. **New Contributors**: Limited to UI improvements and small bug fixes only
+1. **新贡献者**: 仅限于 UI 改进和小错误修复
 
-   - This helps you become familiar with the codebase
-   - UI changes are easier to review and less likely to break core functionality
-   - Small, focused PRs have a higher chance of being accepted
+   - 这有助于你熟悉代码库
+   - UI 更改更容易审查，不太可能破坏核心功能
+   - 小而专注的 PR 有更高的被接受机会
 
-2. **Established Contributors**: After several successful PRs and demonstrating understanding of the codebase, you may work on more complex features
+2. **资深贡献者**: 在几个成功的 PR 后并展示对代码库的理解后，你可以处理更复杂的功能
 
-3. **Core Contributors**: Only those with extensive experience with the project may modify critical game systems
+3. **核心贡献者**: 只有对项目有丰富经验的人才能修改关键游戏系统
 
-### How to Contribute Successfully
+### 如何成功贡献
 
-1. **Before Starting Work**:
+1. **开始工作前**:
 
-   - Open an issue describing what you want to contribute
-   - Wait for maintainer feedback before investing significant time
-   - Small improvements can proceed directly to PR stage
+   - 打开一个 issue 描述你想要贡献的内容
+   - 在投入大量时间前等待维护者反馈
+   - 小改进可以直接进入 PR 阶段
 
-2. **Code Quality Requirements**:
+2. **代码质量要求**:
 
-   - All code must be well-commented and follow existing style patterns
-   - New features should not break existing functionality
-   - Code should be thoroughly tested before submission
-   - All code changes in src/core _MUST_ be tested.
+   - 所有代码必须有良好的注释并遵循现有的样式模式
+   - 新功能不应破坏现有功能
+   - 代码应在提交前经过彻底测试
+   - src/core 中的所有代码更改 _必须_ 经过测试。
 
-3. **Pull Request Process**:
+3. **Pull Request 流程**:
 
-   - Keep PRs focused on a single feature or bug fix
-   - Include screenshots for UI changes
-   - Describe what testing you've performed
-   - Be responsive to feedback and requested changes
+   - 保持 PR 专注于单一功能或错误修复
+   - 为 UI 更改包含截图
+   - 描述你执行的测试
+   - 对反馈和请求的更改保持响应
 
-4. **Testing Requirements**:
-   - Verify your changes work as expected
-   - Test on multiple systems/browsers if applicable
-   - Document your testing process in the PR
+4. **测试要求**:
+   - 验证你的更改按预期工作
+   - 如果适用，在多个系统/浏览器上测试
+   - 在 PR 中记录你的测试过程
 
-### Communication
+### 沟通
 
-- Be respectful and constructive in all project interactions
-- Questions are welcome, but please search existing issues first
-- For major changes, discuss in an issue before starting work
+- 在所有项目交互中保持尊重和建设性
+- 欢迎提问，但请先搜索现有 issue
+- 对于重大更改，在开始工作前在 issue 中讨论
 
-### Final Notes
+### 最后说明
 
-Remember that maintaining this project requires significant effort. The maintainer appreciates your contributions but must prioritize long-term project health and stability. Not all contributions will be accepted, and that's okay.
+请记住，维护这个项目需要大量努力。维护者感谢你的贡献，但必须优先考虑项目的长期健康和稳定性。不是所有贡献都会被接受，这是正常的。
 
-Thank you for helping make OpenFront better!
+感谢你帮助让 OpenFront 变得更好！

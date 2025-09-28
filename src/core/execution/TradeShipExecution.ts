@@ -143,7 +143,7 @@ export class TradeShipExecution implements Execution {
     if (this.wasCaptured) {
       this.tradeShip!.owner().addGold(gold, this._dstPort.tile());
       this.mg.displayMessage(
-        `Received ${renderNumber(gold)} gold from ship captured from ${this.origOwner.displayName()}`,
+        `从${this.origOwner.displayName()}捕获的船只中获得${renderNumber(gold)}黄金`,
         MessageType.CAPTURED_ENEMY_UNIT,
         this.tradeShip!.owner().id(),
         gold,
@@ -152,13 +152,13 @@ export class TradeShipExecution implements Execution {
       this.srcPort.owner().addGold(gold);
       this._dstPort.owner().addGold(gold, this._dstPort.tile());
       this.mg.displayMessage(
-        `Received ${renderNumber(gold)} gold from trade with ${this.srcPort.owner().displayName()}`,
+        `通过与${this.srcPort.owner().displayName()}的贸易获得${renderNumber(gold)}黄金`,
         MessageType.RECEIVED_GOLD_FROM_TRADE,
         this._dstPort.owner().id(),
         gold,
       );
       this.mg.displayMessage(
-        `Received ${renderNumber(gold)} gold from trade with ${this._dstPort.owner().displayName()}`,
+        `通过与${this._dstPort.owner().displayName()}的贸易获得${renderNumber(gold)}黄金`,
         MessageType.RECEIVED_GOLD_FROM_TRADE,
         this.srcPort.owner().id(),
         gold,

@@ -199,12 +199,12 @@ export class UnitImpl implements Unit {
     this._owner._units.push(this);
     this.mg.addUpdate(this.toUpdate());
     this.mg.displayMessage(
-      `Your ${this.type()} was captured by ${newOwner.displayName()}`,
+      `你的${this.type()}被${newOwner.displayName()}占领`,
       MessageType.UNIT_CAPTURED_BY_ENEMY,
       this._lastOwner.id(),
     );
     this.mg.displayMessage(
-      `Captured ${this.type()} from ${this._lastOwner.displayName()}`,
+      `占领${this._lastOwner.displayName()}的${this.type()}`,
       MessageType.CAPTURED_ENEMY_UNIT,
       newOwner.id(),
     );
@@ -231,7 +231,7 @@ export class UnitImpl implements Unit {
     this.mg.removeUnit(this);
     if (displayMessage !== false && this._type !== UnitType.MIRVWarhead) {
       this.mg.displayMessage(
-        `Your ${this._type} was destroyed`,
+        `你的 ${this._type} 被摧毁！`,
         MessageType.UNIT_DESTROYED,
         this.owner().id(),
       );

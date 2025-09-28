@@ -167,7 +167,20 @@ export default async (env, argv) => {
           },
           historyApiFallback: true,
           compress: true,
-          port: 9000,
+          port: 80,
+          // 允许所有主机访问，解决 IP 访问时的错误
+          allowedHosts: "all",
+          // 配置客户端 overlay，避免 IP 访问时的脚本错误
+          client: {
+            overlay: {
+              errors: true,
+              warnings: false,
+            },
+            // 禁用 WebSocket 传输的主机检查
+            webSocketTransport: "ws",
+          },
+          // 禁用主机检查（开发环境）
+          host: "0.0.0.0",
           proxy: [
             // WebSocket proxies
             {
