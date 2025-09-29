@@ -201,7 +201,7 @@ export class NewsModal extends LitElement {
         <div>
           ${translateText("news.see_all_releases")}
           <a
-            href="https://github.com/openfrontio/OpenFrontIO/releases"
+            href="https://github.com/hmkj6688-bit/TrRainGame"
             target="_blank"
             >${translateText("news.github_link")}</a
           >.
